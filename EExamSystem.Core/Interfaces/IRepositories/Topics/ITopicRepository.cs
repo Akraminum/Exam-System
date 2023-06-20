@@ -1,10 +1,5 @@
 ﻿using EExamSystem.Core.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EExamSystem.Infrastructure.Entities.Topics;
+using EExamSystem.Infrastructure.Entities.Topicss;
 
 namespace EExamSystem.Core.Interfaces.IRepositories.Topics
 {
@@ -12,5 +7,5 @@ namespace EExamSystem.Core.Interfaces.IRepositories.Topics
     {
         public Topic? CustomeRepoMethod(int id);
     }
-    
+
 }

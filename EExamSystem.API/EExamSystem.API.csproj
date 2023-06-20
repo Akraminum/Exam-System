@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EExamSystem.Core\EExamSystem.Core.csproj" />
-    <ProjectReference Include="..\EExamSystem.Infrastructure\EExamSystem.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

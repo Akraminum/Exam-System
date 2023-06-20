@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using EExamSystem.Core.Dtos.Tests;
-using EExamSystem.Infrastructure.Entities.Tests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EExamSystem.API.Controllers
@@ -17,12 +15,12 @@ namespace EExamSystem.API.Controllers
         }
 
 
-        [HttpGet]
-        public TestOutputDto Test([FromQuery]TestInputDto input)
+        /*[HttpGet]
+        public TestOutputDto Test([FromQuery] TestInputDto input)
         {
-            var entity = _mapper.Map<Test>(input);
-            var output = _mapper.Map<TestOutputDto>(entity);
-            return output;
-        }
+            *//* var entity = _mapper.Map<Test>(input);
+             var output = _mapper.Map<TestOutputDto>(entity);
+             return output;
+        }*/
     }
 }

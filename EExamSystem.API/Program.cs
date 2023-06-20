@@ -1,7 +1,5 @@
 using EExamSystem.Core;
 using EExamSystem.Infrastructure;
-using EExamSystem.Infrastructure.DataBase;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -15,7 +13,7 @@ builder.Services.InjectRepositories();
 builder.Services.InjectManagers();
 
 //builder.Services.ConfigureAutomapper();
-builder.Services.AddAutoMapper(typeof(Program)); 
+builder.Services.AddAutoMapper(typeof(Program));
 
 #endregion
 

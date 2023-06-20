@@ -1,9 +1,11 @@
 ﻿using EExamSystem.Infrastructure.Entities.Bridgets;
 using EExamSystem.Infrastructure.Entities.Certificates;
-using EExamSystem.Infrastructure.Entities.Questions;
+using EExamSystem.Infrastructure.Entities.Users;
+using Microsoft.EntityFrameworkCore;
 
 namespace EExamSystem.Infrastructure.Entities.Exams
 {
+    [Index(nameof(CertificateId), IsUnique = true)]
     public class Exam
     {
         public int Id { get; set; }
@@ -13,7 +15,8 @@ namespace EExamSystem.Infrastructure.Entities.Exams
 
         // Propriétés de navigation
         public Certificate Certificate { get; set; }
-        public ICollection<UserExam> UserExams { get; set; }
-        public ICollection<Question> Questions { get; set; }
+        public virtual ICollection<StudentExam>? StudentExams { get; set; }
+        public virtual ICollection<StudentProfile>? StudentProfiles { get; set; }
+        /*public virtual ICollection<Question> Questions { get; set; }*/
     }
 }
