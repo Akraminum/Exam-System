@@ -8,16 +8,15 @@
 
   <ItemGroup>
     <Compile Remove="Enitity\**" />
+    <Compile Remove="Mappers\**" />
     <EmbeddedResource Remove="Enitity\**" />
+    <EmbeddedResource Remove="Mappers\**" />
     <None Remove="Enitity\**" />
+    <None Remove="Mappers\**" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\EExamSystem.Infrastructure\EExamSystem.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Managers\" />
   </ItemGroup>
 
   <ItemGroup>
