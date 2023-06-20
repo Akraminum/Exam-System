@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EExamSystem.Core.Interfaces.Repositories
+namespace EExamSystem.Infrastructure.Repositories.IRepositories
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {

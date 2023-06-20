@@ -1,5 +1,5 @@
-﻿using EExamSystem.Core.Interfaces.Repositories;
-using EExamSystem.Infrastructure.DataBase;
+﻿using EExamSystem.Infrastructure.DataBase;
+using EExamSystem.Infrastructure.Repositories.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EExamSystem.Core.Repositories
+namespace EExamSystem.Infrastructure.Repositories
 {
     // it is a stupid simple repo
     public class GenericRepository<T> : IGenericRepository<T> where T : class

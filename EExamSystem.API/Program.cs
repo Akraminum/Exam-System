@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.ConfigureDbContext(configuration);
 
 builder.Services.InjectRepositories();
-builder.Services.InjectManagers();
+builder.Services.InjectServices();
 
 //builder.Services.ConfigureAutomapper();
 builder.Services.AddAutoMapper(typeof(Program));
