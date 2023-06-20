@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace EExamSystem.Infrastructure.Repositories
 {
     // it is a stupid simple repo
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T, Tkey> : IGenericRepository<T, Tkey> where T : class
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -37,10 +37,8 @@ namespace EExamSystem.Infrastructure.Repositories
             return _dbContext.Set<T>().ToList();
         }
 
-        public virtual T? GetById(int id)
+        public virtual T? GetById(Tkey id)
         {
-            if (id <= 0)
-                return null;
             return _dbContext.Set<T>().Find(id);
         }
 

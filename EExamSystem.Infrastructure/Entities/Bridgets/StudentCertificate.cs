@@ -4,7 +4,7 @@ namespace EExamSystem.Infrastructure.Entities.Bridgets
 {
     public class StudentCertificate
     {
-        public int StudentId { get; set; }
+        public string StudentId { get; set; }
         public int CertificateId { get; set; }
         public DateTime DateAchieved { get; set; }
 

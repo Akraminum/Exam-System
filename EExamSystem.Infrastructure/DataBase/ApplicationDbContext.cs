@@ -25,6 +25,8 @@ namespace EExamSystem.Infrastructure.DataBase
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<StudentProfile> StudentProfiles { get; set; }
+
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 

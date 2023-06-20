@@ -1,8 +1,6 @@
 ﻿
 
 using EExamSystem.Infrastructure.DataBase;
-using EExamSystem.Infrastructure.Repositories.IRepositories.Topics;
-using EExamSystem.Infrastructure.Repositories.Topics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +17,7 @@ namespace EExamSystem.Infrastructure
 
         public static void InjectRepositories(this IServiceCollection services)
         {
-            services.AddScoped<ITopicRepository, TopicRepository>();
+            //services.AddScoped<ITopicRepository, TopicRepository>();
         }
 
 

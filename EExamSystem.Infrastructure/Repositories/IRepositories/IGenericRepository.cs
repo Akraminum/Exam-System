@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace EExamSystem.Infrastructure.Repositories.IRepositories
 {
-    public interface IGenericRepository<TEntity> where TEntity : class
+    public interface IGenericRepository<TEntity, Tkey> where TEntity : class
     {
         TEntity Add(TEntity entity);
         void Remove(TEntity entity);
         public TEntity Update(TEntity entity);
 
 
-        TEntity? GetById(int id);
+        TEntity? GetById(Tkey id);
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
     }
