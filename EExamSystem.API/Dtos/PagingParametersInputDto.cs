@@ -1,25 +1,26 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EExamSystem.Core.DTO
+namespace EExamSystem.Core.Dtos
 {
-    public class PagingParametersDto
+    public class PagingParametersInputDto
     {
-        const int maxPageSize = 20;
-        private int _pageSize = 15;
+        const int _maxCount = 20;
+        private int _defaultCount = 15;
+
 
         [Range(0, int.MaxValue)]
         public int PageNumber { get; set; } = 1;
 
         [Range(0, int.MaxValue)]
-        public int PageSize
+        public int Count
         {
             get
             {
-                return _pageSize;
+                return _defaultCount;
             }
             set
             {
-                _pageSize = (value > maxPageSize) ? maxPageSize : value;
+                _defaultCount = (value > _maxCount) ? _maxCount : value;
             }
         }
     }

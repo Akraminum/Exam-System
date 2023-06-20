@@ -11,9 +11,15 @@ namespace EExamSystem.Infrastructure.DataBase
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        // DbSet
+        // DbSets
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+        }
     }
 }

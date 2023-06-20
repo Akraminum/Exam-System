@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace EExamSystem.Core.Repositories
 {
+    // it is a stupid simple repo
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly ApplicationDbContext _dbContext;
