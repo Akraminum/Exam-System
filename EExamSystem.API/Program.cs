@@ -1,23 +1,33 @@
+using EExamSystem.Core;
+using EExamSystem.Infrastructure;
 using EExamSystem.Infrastructure.DataBase;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
-// Add services to the container.
+#region Services
 
 builder.Services.AddControllers();
+builder.Services.ConfigureDbContext(configuration);
 
-builder.Services.AddDbContext<ApplicationDbContext>(opt =>
-                opt.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+builder.Services.InjectRepositories();
+builder.Services.InjectManagers();
 
+//builder.Services.ConfigureAutomapper();
+builder.Services.AddAutoMapper(typeof(Program)); 
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+#endregion
+
+#region Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 var app = builder.Build();
+#endregion
 
-// Configure the HTTP request pipeline.
+//...
+
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

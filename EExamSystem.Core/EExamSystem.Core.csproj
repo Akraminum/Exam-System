@@ -17,9 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\IManagers\" />
     <Folder Include="Managers\" />
-    <Folder Include="Mappers\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EExamSystem.Infrastructure.Entities
+namespace EExamSystem.Infrastructure.Entities.Topics
 {
     public class Topic
     {
