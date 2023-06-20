@@ -72,16 +72,12 @@ namespace EExamSystem.Infrastructure.DataBase
                .HasForeignKey(pt => pt.StudentId),
            j =>
            {
-
-               j.HasKey(t => new { t.StudentId, t.ExamId });
+               //j.HasKey(t => t.Id);
                j.ToTable("UserExamEnrollments");
            });
 
 
-
-
-
-            modelBuilder
+           modelBuilder
           .Entity<StudentExam>()
           .HasMany(c => c.Questions)
           .WithMany(s => s.StudentExams)
@@ -90,22 +86,29 @@ namespace EExamSystem.Infrastructure.DataBase
               .HasOne(pt => pt.Question)
               .WithMany(t => t.UserExamQuestions)
               .HasForeignKey(pt => pt.QuestionId),
-          j => j
-              .HasOne(pt => pt.UserExam)
-              .WithMany(p => p.UserExamQuestions)
-              .HasForeignKey(pt => pt.UserExamId),
-          j =>
-          {
+            j => j
+                .HasOne(pt => pt.UserExam)
+                .WithMany(p => p.UserExamQuestions)
+                .HasForeignKey(pt => pt.UserExamId),
+            j =>
+            {
+                //j.HasKey(t => new { t.UserExam, t.QuestionId });
+                j.ToTable("UserExamQuestionHistory");
+            });
 
-              j.HasKey(t => new { t.UserExamId, t.QuestionId });
-              j.ToTable("UserExamQuestionHistory");
-          });
+            modelBuilder
+           .Entity<StudentExamQuestion>()
+           .HasOne(eq => eq.Choice)
+           .WithMany()
+           .HasForeignKey(eq => eq.ChoiceId)
+           .OnDelete(DeleteBehavior.Restrict);
 
-
-            modelBuilder.Entity<StudentExamQuestion>()
-        .HasOne(sq => sq.UserExam)
-        .WithMany(ue => ue.UserExamQuestions)
-        .HasForeignKey(sq => sq.UserExamId);
+            modelBuilder
+            .Entity<StudentExamQuestion>()
+            .HasOne(eq => eq.Question)
+            .WithMany()
+            .HasForeignKey(eq => eq.QuestionId)
+            .OnDelete(DeleteBehavior.Restrict);
 
 
         }
