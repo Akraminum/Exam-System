@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using EExamSystem.Core.Dtos.Test;
+using EExamSystem.Core.Dtos.Tests;
 using EExamSystem.Infrastructure.Entities.Tests;
 using System;
 using System.Collections.Generic;
