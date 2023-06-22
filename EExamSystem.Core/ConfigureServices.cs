@@ -11,8 +11,9 @@ namespace EExamSystem.Core
         public static void InjectServices(this IServiceCollection services)
         {
             services.AddAutoMapper(typeof(TestsProfile));
-            services.AddScoped<ITopicService, TopicService>();
-            services.AddScoped<ICateoryService, CateoryService>();
+            //services.AddScoped<ITopicService, TopicService>();
+            //services.AddScoped<ICateoryService, CateoryService>();
+            services.AddScoped<IQuestionService, QuestionService>();
         }
 
 

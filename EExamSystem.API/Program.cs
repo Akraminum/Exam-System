@@ -1,3 +1,4 @@
+using EExamSystem.API.GlobalErrorHandling.Extensions;
 using EExamSystem.Core;
 using EExamSystem.Infrastructure;
 
@@ -32,6 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.ConfigureExceptionHandler();
 
 app.UseHttpsRedirection();
 

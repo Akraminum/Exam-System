@@ -21,7 +21,8 @@ namespace EExamSystem.Infrastructure
         {
 
             services.AddScoped<ITopicRepository, TopicRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>(); 
+            services.AddScoped<IQuestionRepository, QuestionRepository>(); 
 
 
         }
