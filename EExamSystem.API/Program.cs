@@ -10,10 +10,11 @@ builder.Services.AddControllers();
 builder.Services.ConfigureDbContext(configuration);
 
 builder.Services.InjectRepositories();
+
 builder.Services.InjectServices();
 
-//builder.Services.ConfigureAutomapper();
-builder.Services.AddAutoMapper(typeof(Program));
+/*builder.Services.ConfigureAutomapper();*/
+/*builder.Services.AddAutoMapper(typeof(Program));*/
 
 #endregion
 
@@ -39,3 +40,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
+
+

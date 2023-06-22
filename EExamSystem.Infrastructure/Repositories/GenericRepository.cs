@@ -1,6 +1,5 @@
 ﻿using EExamSystem.Infrastructure.DataBase;
 using EExamSystem.Infrastructure.Repositories.IRepositories;
-using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace EExamSystem.Infrastructure.Repositories
@@ -9,58 +8,56 @@ namespace EExamSystem.Infrastructure.Repositories
     public class GenericRepository<T, Tkey> : IGenericRepository<T, Tkey> where T : class
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly ApplicationDbContext _aspNetCoreNTierDbContext;
-        public GenericRepository(ApplicationDbContext aspNetCoreNTierDbContext)
+
+        public GenericRepository(ApplicationDbContext context)
         {
-            _aspNetCoreNTierDbContext = aspNetCoreNTierDbContext;
+            _dbContext = context;
         }
-        public async Task<T> AddAsync(T entity)
+
+
+        public T Add(T entity)
         {
-            await _aspNetCoreNTierDbContext.AddAsync(entity);
-            await _aspNetCoreNTierDbContext.SaveChangesAsync();
+            _dbContext.Set<T>().Add(entity);
             return entity;
         }
 
-        public async Task<List<T>> AddRangeAsync(List<T> entity)
+        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
         {
-            await _aspNetCoreNTierDbContext.AddRangeAsync(entity);
-            await _aspNetCoreNTierDbContext.SaveChangesAsync();
-            return entity;
+            return _dbContext.Set<T>().Where(predicate);
         }
 
-        public async Task<int> DeleteAsync(T entity)
+        public IEnumerable<T> GetAll()
         {
-            _ = _aspNetCoreNTierDbContext.Remove(entity);
-            return await _aspNetCoreNTierDbContext.SaveChangesAsync();
+            return _dbContext.Set<T>().ToList();
         }
 
-        public async Task<T> GetAsync(Expression<Func<T, bool>> filter = null)
+        public virtual T? GetById(Tkey id)
         {
-            return await _aspNetCoreNTierDbContext.Set<T>().AsNoTracking().FirstOrDefaultAsync(filter);
+            return _dbContext.Set<T>().Find(id);
         }
 
-        public async Task<List<T>> GetListAsync(Expression<Func<T, bool>> filter = null)
+        public void Remove(T entity)
         {
-            return await (filter == null ? _aspNetCoreNTierDbContext.Set<T>().ToListAsync() : _aspNetCoreNTierDbContext.Set<T>().Where(filter).ToListAsync());
+            _dbContext.Set<T>().Remove(entity);
         }
 
-        public async Task<T> UpdateAsync(T entity)
+        public T Update(T entity)
         {
-            _ = _aspNetCoreNTierDbContext.Update(entity);
-            await _aspNetCoreNTierDbContext.SaveChangesAsync();
-            return entity;
-        }
-
-        public async Task<List<T>> UpdateRangeAsync(List<T> entity)
-        {
-            _aspNetCoreNTierDbContext.UpdateRange(entity);
-            await _aspNetCoreNTierDbContext.SaveChangesAsync();
+            _dbContext.Set<T>().Update(entity);
             return entity;
         }
 
 
+        public void AddRange(IEnumerable<T> entities)
+        {
+            _dbContext.Set<T>().AddRange(entities);
+        }
 
-
+        public void RemoveRange(IEnumerable<T> entities)
+        {
+            _dbContext.Set<T>().RemoveRange(entities);
+        }
 
     }
+}
 }

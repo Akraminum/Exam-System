@@ -5,13 +5,13 @@ namespace EExamSystem.Core.Services.IServices
 {
     public interface ITopicService
     {
-        Task<TopicDto> GetAsync(Expression<Func<TopicDto, bool>> filter = null);
-        Task<List<TopicDto>> GetListAsync(Expression<Func<TopicDto, bool>> filter = null);
-        Task<TopicDto> AddAsync(TopicDto entity);
-        Task<TopicDto> UpdateAsync(TopicDto entity);
-        Task<int> DeleteAsync(TopicDto entity);
-        Task<List<TopicDto>> AddRangeAsync(List<TopicDto> entity);
-        Task<List<TopicDto>> UpdateRangeAsync(List<TopicDto> entity);
-        Task<List<TopicDto>> GetByCategoryId(int id);
+        TopicDtoOutput Add(TopicDtoInput entity);
+        void Remove(TopicDtoInput entity);
+        public TopicDtoOutput Update(TopicDtoUpdate entity);
+
+
+        TopicDtoOutput? GetById(int id);
+        IEnumerable<TopicDtoOutput> GetAll();
+        IEnumerable<TopicDtoOutput> Find(Expression<Func<TopicDtoInput, bool>> predicate);
     }
 }

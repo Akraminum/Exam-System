@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace EExamSystem.Core.Validator
 {
-    public class AddCategoryDto : AbstractValidator<CategoryDto>
+    public class AddCategoryDto : AbstractValidator<CategoryDtoInput>
     {
         public AddCategoryDto()
         {

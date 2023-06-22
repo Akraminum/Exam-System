@@ -16,59 +16,80 @@ namespace EExamSystem.Core.Services
             _TopicRepository = TopicRepository;
             _mapper = mapper;
         }
-        public async Task<TopicDto> AddAsync(TopicDto entity)
+        public async Task<TopicDtoOutput> AddAsync(TopicDtoInput entity)
         {
             var TopicMapper = _mapper.Map<Topic>(entity);
-            await _TopicRepository.AddAsync(TopicMapper);
-            return entity;
+            _TopicRepository.Add(TopicMapper);
+            var TopicDto = _mapper.Map<TopicDtoOutput>(entity);
+            return TopicDto;
         }
 
-        public async Task<List<TopicDto>> AddRangeAsync(List<TopicDto> entity)
-        {
-            var TopicListMapper = _mapper.Map<List<Topic>>(entity);
-            await _TopicRepository.AddRangeAsync(TopicListMapper);
-            return entity;
-        }
 
-        public async Task<int> DeleteAsync(TopicDto entity)
+
+        public void DeleteAsync(TopicDtoInput entity)
         {
             var TopicMapper = _mapper.Map<Topic>(entity);
-            return await _TopicRepository.DeleteAsync(TopicMapper);
+            _TopicRepository.Remove(TopicMapper);
         }
 
-        public async Task<TopicDto> GetAsync(Expression<Func<TopicDto, bool>> filter = null)
-        {
 
-            var result = await _TopicRepository.GetAsync();
-            var TopicMapper = _mapper.Map<TopicDto>(result);
+
+        public async Task<List<TopicDtoOutput>> GetListAsync(Expression<Func<TopicDtoInput, bool>> filter = null)
+        {
+            var result = _TopicRepository.GetAll();
+            var TopicMapper = _mapper.Map<List<TopicDtoOutput>>(result);
             return TopicMapper;
         }
 
-        public async Task<List<TopicDto>> GetListAsync(Expression<Func<TopicDto, bool>> filter = null)
-        {
-            var result = await _TopicRepository.GetListAsync();
-            var TopicMapper = _mapper.Map<List<TopicDto>>(result);
-            return TopicMapper;
-        }
-
-        public async Task<TopicDto> UpdateAsync(TopicDto entity)
+        public async Task<TopicDtoOutput> UpdateAsync(TopicDtoUpdate entity)
         {
             var TopicMapper = _mapper.Map<Topic>(entity);
-            var result = await _TopicRepository.UpdateAsync(TopicMapper);
+            var result = _TopicRepository.Update(TopicMapper);
 
-            return entity;
+            var TopicDto = _mapper.Map<TopicDtoOutput>(result);
+            return TopicDto;
         }
 
-        public async Task<List<TopicDto>> UpdateRangeAsync(List<TopicDto> entity)
+
+
+        public async Task<List<TopicDtoOutput>> GetByCategoryId(int id)
         {
-            var TopicListMapper = _mapper.Map<List<Topic>>(entity);
-            await _TopicRepository.UpdateRangeAsync(TopicListMapper);
-            return entity;
+            var result = await _TopicRepository.GetByCategoryId(id);
+            var TopicListMapper = _mapper.Map<List<TopicDtoOutput>>(result);
+            return TopicListMapper;
         }
 
-        Task<List<TopicDto>> ITopicService.GetByCategoryId(int id)
+        public TopicDtoOutput Add(TopicDtoInput entity)
         {
+            var TopicMapper = _mapper.Map<Topic>(entity);
+            _TopicRepository.Add(TopicMapper);
+            var TopicDto = _mapper.Map<TopicDtoOutput>(entity);
+            return TopicDto;
+        }
 
+        public void Remove(TopicDtoInput entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TopicDtoOutput Update(TopicDtoUpdate entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TopicDtoOutput? GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<TopicDtoOutput> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<TopicDtoOutput> Find(Expression<Func<TopicDtoInput, bool>> predicate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

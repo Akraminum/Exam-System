@@ -5,12 +5,12 @@ namespace EExamSystem.Core.Services.IServices
 {
     public interface ICateoryService
     {
-        Task<CategoryDto> GetAsync(Expression<Func<CategoryDto, bool>> filter = null);
-        Task<List<CategoryDto>> GetListAsync(Expression<Func<CategoryDto, bool>> filter = null);
-        Task<CategoryDto> AddAsync(CategoryDto entity);
-        Task<CategoryDto> UpdateAsync(CategoryDto entity);
-        Task<int> DeleteAsync(CategoryDto entity);
-        Task<List<CategoryDto>> AddRangeAsync(List<CategoryDto> entity);
-        Task<List<CategoryDto>> UpdateRangeAsync(List<CategoryDto> entity);
+        Task<CategoryDtoOutput> GetAsync(Expression<Func<CategoryDtoInput, bool>> filter = null);
+        Task<List<CategoryDtoOutput>> GetListAsync(Expression<Func<CategoryDtoInput, bool>> filter = null);
+        Task<CategoryDtoOutput> AddAsync(CategoryDtoInput entity);
+        Task<CategoryDtoOutput> UpdateAsync(CategoryUpdateDto entity);
+        Task<int> DeleteAsync(CategoryDtoInput entity);
+        Task<List<CategoryDtoOutput>> AddRangeAsync(List<CategoryDtoInput> entity);
+        Task<List<CategoryDtoOutput>> UpdateRangeAsync(List<CategoryUpdateDto> entity);
     }
 }
