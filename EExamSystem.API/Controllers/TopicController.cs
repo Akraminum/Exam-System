@@ -21,6 +21,7 @@ namespace EExamSystem.API.Controllers
         [HttpPost]
         public async Task<ResponseDto> AddTopic(TopicDtoInput topic)
         {
+
             try
             {
                 var result = _topicService.Add(topic);
@@ -33,6 +34,10 @@ namespace EExamSystem.API.Controllers
                 _response.ErrorMessages
                     = new List<string> { ex.ToString() };
             }
+
+
+
+
 
             return _response;
         }
