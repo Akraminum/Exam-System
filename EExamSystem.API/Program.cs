@@ -9,12 +9,13 @@ var configuration = builder.Configuration;
 builder.Services.AddControllers();
 builder.Services.ConfigureDbContext(configuration);
 
+
 builder.Services.InjectRepositories();
 
 builder.Services.InjectServices();
 
 /*builder.Services.ConfigureAutomapper();*/
-/*builder.Services.AddAutoMapper(typeof(Program));*/
+builder.Services.AddAutoMapper(typeof(Program));
 
 #endregion
 

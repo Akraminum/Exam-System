@@ -16,13 +16,16 @@ namespace EExamSystem.Core.Services
             _CategoryRepository = CategoryRepository;
             _mapper = mapper;
         }
-        public async Task<CategoryDtoOutput> AddAsync(CategoryDtoInput entity)
+
+        public async Task<CategoryDtoOutput> Add(CategoryDtoInput entity)
         {
             var CategoryMapper = _mapper.Map<Category>(entity);
             await _CategoryRepository.AddAsync(CategoryMapper);
             var CategoryMapper1 = _mapper.Map<CategoryDtoOutput>(CategoryMapper);
             return CategoryMapper1;
         }
+
+
 
         public async Task<List<CategoryDtoOutput>> AddRangeAsync(List<CategoryDtoInput> entity)
         {
@@ -32,29 +35,34 @@ namespace EExamSystem.Core.Services
             return CategoryMapper;
         }
 
-        public async Task<int> DeleteAsync(CategoryDtoInput entity)
-        {
-            var CategoryMapper = _mapper.Map<Category>(entity);
-            return await _CategoryRepository.DeleteAsync(CategoryMapper);
 
-        }
 
-        public async Task<CategoryDtoOutput> GetAsync(Expression<Func<CategoryDtoInput, bool>> filter = null)
-        {
 
-            var result = await _CategoryRepository.GetAsync();
-            var CategoryMapper = _mapper.Map<CategoryDtoOutput>(result);
-            return CategoryMapper;
-        }
-
-        public async Task<List<CategoryDtoOutput>> GetListAsync(Expression<Func<CategoryDtoInput, bool>> filter = null)
+        public async Task<IEnumerable<CategoryDtoOutput>> GetAll()
         {
             var result = await _CategoryRepository.GetListAsync();
             var CategoryMapper = _mapper.Map<List<CategoryDtoOutput>>(result);
             return CategoryMapper;
         }
 
-        public async Task<CategoryDtoOutput> UpdateAsync(CategoryUpdateDto entity)
+
+
+        public async Task<CategoryDtoOutput>? GetById(int id)
+        {
+            var result = await _CategoryRepository.GetByIdAsync(id);
+            var CategoryMapper = _mapper.Map<CategoryDtoOutput>(result);
+            return CategoryMapper;
+        }
+
+
+
+        public async void Remove(CategoryUpdateDto entity)
+        {
+            var CategoryMapper = _mapper.Map<Category>(entity);
+            await _CategoryRepository.DeleteAsync(entity.Id);
+        }
+
+        public async Task<CategoryDtoOutput> Update(CategoryUpdateDto entity)
         {
             var CategoryMapper = _mapper.Map<Category>(entity);
             var result = await _CategoryRepository.UpdateAsync(CategoryMapper);
@@ -62,12 +70,19 @@ namespace EExamSystem.Core.Services
             return CategoryListMapper1;
         }
 
+
+
         public async Task<List<CategoryDtoOutput>> UpdateRangeAsync(List<CategoryUpdateDto> entity)
         {
             var CategoryListMapper = _mapper.Map<List<Category>>(entity);
             await _CategoryRepository.UpdateRangeAsync(CategoryListMapper);
             var CategoryListMapper1 = _mapper.Map<List<CategoryDtoOutput>>(CategoryListMapper);
             return CategoryListMapper1;
+        }
+
+        Task<IEnumerable<CategoryDtoOutput>> ICateoryService.Find(Expression<Func<CategoryDtoInput, bool>> predicate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

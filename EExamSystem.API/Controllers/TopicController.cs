@@ -1,4 +1,5 @@
-﻿using EExamSystem.Core.Dtos.TopicDtos;
+﻿using EExamSystem.API.Models;
+using EExamSystem.Core.Dtos.TopicDtos;
 using EExamSystem.Core.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,72 +9,104 @@ namespace EExamSystem.API.Controllers
     [ApiController]
     public class TopicController : ControllerBase
     {
+        private ResponseDto _response;
         private readonly ITopicService _topicService;
         public TopicController(ITopicService topicService)
         {
             _topicService = topicService;
+            _response = new ResponseDto();
         }
-        /*    [HttpGet]
-            public async Task<IActionResult> GetAllTopic()
-            {
-                try
-                {
-                    return Ok(await _topicService.GetListAsync());
-                }
-                catch (Exception)
-                {
-                    return BadRequest("Something went wrong");
-                }
-            }
-            [HttpGet]
-            public async Task<IActionResult> GetListTopicsByCategoryId(int id)
-            {
-                try
-                {
-                    return Ok(await _topicService.GetByCategoryId(id));
-                }
-                catch (Exception)
-                {
-                    return BadRequest("Something went wrong");
-                }
-            }*/
+
 
         [HttpPost]
-        public async Task<IActionResult> AddTopic(TopicDtoInput topic)
+        public async Task<ResponseDto> AddTopic(TopicDtoInput topic)
         {
             try
             {
-                var result = await _topicService.AddAsync(topic);
-                return Ok(result);
+                var result = _topicService.Add(topic);
+                _response.Result = result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest("Something went wrong");
+
+                _response.IsSuccess = false;
+                _response.ErrorMessages
+                    = new List<string> { ex.ToString() };
             }
+
+            return _response;
         }
         [HttpGet("GetByCategoryId")]
-        public async Task<IActionResult> GetByCategoryId(int id)
+        public async Task<ResponseDto> GetByCategoryId(int id)
         {
             try
             {
-                return Ok(await _topicService.GetByCategoryId(id));
+                var result = await _topicService.GetByCategoryId(id);
+                _response.Result = result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest("Something went wrong");
+
+                _response.IsSuccess = false;
+                _response.ErrorMessages
+                    = new List<string> { ex.ToString() };
             }
+
+            return _response;
         }
         [HttpGet("GetAllTopic")]
-        public async Task<IActionResult> GetAllTopic()
+        public async Task<ResponseDto> GetAllTopic()
         {
             try
             {
-                return Ok(await _topicService.GetListAsync());
+                var result = await _topicService.GetAll();
+                _response.Result = result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest("Something went wrong");
+
+                _response.IsSuccess = false;
+                _response.ErrorMessages
+                    = new List<string> { ex.ToString() };
             }
+
+            return _response;
+        }
+        [HttpDelete]
+        public async Task<ResponseDto> Remove(TopicDtoUpdate entity)
+        {
+            try
+            {
+                _topicService.Remove(entity);
+                _response.Result = "this topic is deleted";
+            }
+            catch (Exception ex)
+            {
+
+                _response.IsSuccess = false;
+                _response.ErrorMessages
+                    = new List<string> { ex.ToString() };
+            }
+
+            return _response;
+        }
+        [HttpPut]
+        public async Task<ResponseDto> Update(TopicDtoUpdate entity)
+        {
+            try
+            {
+                var result = await _topicService.Update(entity);
+                _response.Result = result;
+            }
+            catch (Exception ex)
+            {
+
+                _response.IsSuccess = false;
+                _response.ErrorMessages
+                    = new List<string> { ex.ToString() };
+            }
+
+            return _response;
         }
     }
 }

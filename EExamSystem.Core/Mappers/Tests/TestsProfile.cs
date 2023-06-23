@@ -18,6 +18,15 @@ namespace EExamSystem.API.Mappers.Tests
             CreateMap<TopicDtoInput, Topic>();
             CreateMap<Topic, TopicDtoOutput>();
             CreateMap<TopicDtoUpdate, Topic>();
+
+
+            CreateMap<TopicDtoInput, TopicDtoOutput>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore()) // Ignorer la propriété "Id" lors du mapping
+            .ForMember(dest => dest.Category, opt => opt.Ignore()); // Ignorer la propriété "Category" lors du mapping
+
+            CreateMap<CategoryDtoInput, CategoryDtoOutput>()
+           .ForMember(dest => dest.Id, opt => opt.Ignore());// Ignorer la propriété "Id" lors du mapping
+
         }
     }
 }

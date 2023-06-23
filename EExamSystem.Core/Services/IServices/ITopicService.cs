@@ -5,13 +5,13 @@ namespace EExamSystem.Core.Services.IServices
 {
     public interface ITopicService
     {
-        TopicDtoOutput Add(TopicDtoInput entity);
-        void Remove(TopicDtoInput entity);
-        public TopicDtoOutput Update(TopicDtoUpdate entity);
+        Task<TopicDtoOutput> Add(TopicDtoInput entity);
+        void Remove(TopicDtoUpdate entity);
+        Task<TopicDtoOutput> Update(TopicDtoUpdate entity);
 
-
-        TopicDtoOutput? GetById(int id);
-        IEnumerable<TopicDtoOutput> GetAll();
-        IEnumerable<TopicDtoOutput> Find(Expression<Func<TopicDtoInput, bool>> predicate);
+        Task<List<TopicDtoOutput>> GetByCategoryId(int id);
+        Task<TopicDtoOutput>? GetById(int id);
+        Task<IEnumerable<TopicDtoOutput>> GetAll();
+        Task<IEnumerable<TopicDtoOutput>> Find(Expression<Func<TopicDtoInput, bool>> predicate);
     }
 }
