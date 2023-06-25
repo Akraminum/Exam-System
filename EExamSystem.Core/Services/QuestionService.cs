@@ -22,7 +22,7 @@ namespace EExamSystem.Core.Services
         public async Task CreateQuestion(Question question)
         {
             // Validate Topic Existence
-            // need TopicsService
+            // need TopicsService VS TopicRepo
 
 
             // Validate that at least one choice is correct one
