@@ -13,6 +13,7 @@ namespace EExamSystem.Core
             services.AddAutoMapper(typeof(TestsProfile));
             services.AddScoped<ITopicService, TopicService>();
             services.AddScoped<ICateoryService, CateoryService>();
+            services.AddScoped<ICertificateService, CertificateService>();
         }
 
 

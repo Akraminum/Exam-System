@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EExamSystem.Infrastructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EExamSystem.Core", "EExamSystem.Core\EExamSystem.Core.csproj", "{F39258CA-25D6-48F2-81A1-456607242196}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EExamSystem.API", "EExamSystem.API\EExamSystem.API.csproj", "{30B206F3-70E7-46AA-B6F8-5038526B1212}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EExamSystem.API", "EExamSystem.API\EExamSystem.API.csproj", "{30B206F3-70E7-46AA-B6F8-5038526B1212}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
