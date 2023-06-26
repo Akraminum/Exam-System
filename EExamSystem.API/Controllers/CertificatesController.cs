@@ -102,19 +102,21 @@ namespace EExamSystem.API.Controllers
                     _response.Result = input;
                 }
 
+                //Category Id must be unique
                 var _exist = await _certificateService.GetListByCategoryIdAsync(input.CategoryId);
-
                 if (_exist != null)
                 {
                     _response.DisplayMessage = "Sorry, This Category Id is Already Exist in Database.";
                     _response.Result = input;
                 }
 
+                //check Pass Percentage Range 
                 if (_certificateService.CheckRange(input.PassPercentage))
                 {
                     _response.DisplayMessage = "Sorry, Pass Percentage must be between 50 and 100.";
                     _response.Result = input;
                 }
+
 
                 var _data = await _certificateService.AddAsync(input);
 
