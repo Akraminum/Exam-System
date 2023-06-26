@@ -26,7 +26,10 @@ namespace EExamSystem.API.Controllers
             try
             {
                 if (id <= 0)
+                {
                     _response.DisplayMessage = "Please enter Valid Id, Id Can't be null, 0 or less than 1.";
+                    _response.Result = id;
+                }
 
                 var _data = await _certificateService.GetAsync(id);
 
@@ -68,10 +71,15 @@ namespace EExamSystem.API.Controllers
         {
             try
             {
+                if (id <= 0)
+                {
+                    _response.DisplayMessage = "Please enter Valid Id, Id Can't be null, 0 or less than 1.";
+                    _response.Result = id;
+                }
                 var _data = await _certificateService.GetListByCategoryIdAsync(id);
 
                 if (_data == null)
-                    _response.DisplayMessage = "Sorry, This Id Doesn't Exist.";
+                    _response.DisplayMessage = "Sorry, This Category Id Doesn't Exist in database.";
 
                 _response.Result = _data;
             }
@@ -89,7 +97,24 @@ namespace EExamSystem.API.Controllers
             try
             {
                 if (!ModelState.IsValid)
+                {
                     _response.DisplayMessage = "You entered invalid data.";
+                    _response.Result = input;
+                }
+
+                var _exist = await _certificateService.GetListByCategoryIdAsync(input.CategoryId);
+
+                if (_exist != null)
+                {
+                    _response.DisplayMessage = "Sorry, This Category Id is Already Exist in Database.";
+                    _response.Result = input;
+                }
+
+                if (_certificateService.CheckRange(input.PassPercentage))
+                {
+                    _response.DisplayMessage = "Sorry, Pass Percentage must be between 50 and 100.";
+                    _response.Result = input;
+                }
 
                 var _data = await _certificateService.AddAsync(input);
 
@@ -113,7 +138,29 @@ namespace EExamSystem.API.Controllers
             try
             {
                 if (!ModelState.IsValid || input.Count <= 0)
+                {
                     _response.DisplayMessage = "Please Enter Some Valid Data.";
+                    _response.Result = input;
+                }
+
+                foreach (var item in input)
+                {
+                    var _exist = await _certificateService.GetListByCategoryIdAsync(item.CategoryId);
+
+                    if (_exist != null)
+                    {
+                        _response.DisplayMessage = "Sorry, This Category Id is Already Exist in Database.";
+                        _response.Result = item;
+                    }
+
+                    var check = _certificateService.CheckRange(item.PassPercentage);
+                    if (check == false)
+                    {
+                        _response.DisplayMessage = "Sorry, Pass Percentage must be between 50 and 100.";
+                        _response.Result = item;
+                    }
+
+                }
 
                 var _data = await _certificateService.AddRangeAsync(input);
 
@@ -137,7 +184,25 @@ namespace EExamSystem.API.Controllers
             try
             {
                 if (!ModelState.IsValid)
+                {
                     _response.DisplayMessage = "You entered invalid data.";
+                    _response.Result = input;
+                }
+
+                var _exist = await _certificateService.GetListByCategoryIdAsync(input.CategoryId);
+
+                if (_exist != null)
+                {
+                    _response.DisplayMessage = "Sorry, This Category Id is Already Exist in Database.";
+                    _response.Result = input;
+                }
+
+                var check = _certificateService.CheckRange(input.PassPercentage);
+                if (check == false)
+                {
+                    _response.DisplayMessage = "Sorry, Pass Percentage must be between 50 and 100.";
+                    _response.Result = input;
+                }
 
                 var _data = await _certificateService.UpdateAsync(input);
 
@@ -162,7 +227,27 @@ namespace EExamSystem.API.Controllers
             try
             {
                 if (!ModelState.IsValid || input.Count <= 0)
+                {
                     _response.DisplayMessage = "Please Enter Some Valid Data.";
+                    _response.Result = input;
+                }
+
+                foreach (var item in input)
+                {
+                    var _exist = await _certificateService.GetListByCategoryIdAsync(item.CategoryId);
+                    if (_exist != null)
+                    {
+                        _response.DisplayMessage = "Sorry, This Category Id is Already Exist in Database.";
+                        _response.Result = item;
+                    }
+
+                    var check = _certificateService.CheckRange(item.PassPercentage);
+                    if (check == false)
+                    {
+                        _response.DisplayMessage = "Sorry, Pass Percentage must be between 50 and 100.";
+                        _response.Result = item;
+                    }
+                }
 
                 var _data = await _certificateService.UpdateRangeAsync(input);
 
@@ -186,7 +271,10 @@ namespace EExamSystem.API.Controllers
             try
             {
                 if (!ModelState.IsValid)
+                {
                     _response.DisplayMessage = "You entered invalid data.";
+                    _response.Result = input;
+                }
                 await _certificateService.DeleteAsync(input);
 
                 _response.DisplayMessage = "This Record Deleted Successfully.";

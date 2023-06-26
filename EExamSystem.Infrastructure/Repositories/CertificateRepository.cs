@@ -23,13 +23,13 @@ namespace EExamSystem.Infrastructure.Repositories
 
         public async Task<Certificate> GetByIdAsync(int id)
         {
-            var _data = await _DbContext.Certificates.Include(c => c.Category).FirstOrDefaultAsync(a => a.Id == id);
+            var _data = await _DbContext.Certificates.Include(c => c.Category).SingleOrDefaultAsync(a => a.Id == id);
             return _data;
         }
 
-        public async Task<List<Certificate>> GetListByCategoryIdAsync(int id)
+        public async Task<Certificate> GetListByCategoryIdAsync(int id)
         {
-            var _data = await _DbContext.Certificates.Where(a => a.Category.Id == id).Include(a => a.Category).ToListAsync();
+            var _data = await _DbContext.Certificates.Include(a => a.Category).SingleOrDefaultAsync(a => a.CategoryId == id);
             return _data;
         }
 

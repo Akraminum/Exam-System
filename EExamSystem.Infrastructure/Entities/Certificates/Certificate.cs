@@ -16,8 +16,9 @@ namespace EExamSystem.Infrastructure.Entities.Certificates
         public string Title { get; set; }
         public string? Description { get; set; }
 
-        [MaxLength(100, ErrorMessage = "Sorry but Pass Percentage can't be more than 100")]
-        [MinLength(0, ErrorMessage = "Sorry but Pass Percentage can't be less than 0")]
+        //[MaxLength(100, ErrorMessage = "Sorry but Pass Percentage can't be more than 100")]
+        //[MinLength(0, ErrorMessage = "Sorry but Pass Percentage can't be less than 0")]
+        [Range(0, 100, ErrorMessage = "Sorry but Pass Percentage must be between 50 and 100.")]
         public decimal? PassPercentage { get; set; }
 
         public string? signature { get; set; }

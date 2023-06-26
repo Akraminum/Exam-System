@@ -7,7 +7,7 @@ namespace EExamSystem.Infrastructure.Repositories.IRepositories
         //Task<List<Certificate>> FilterAsync(Expression<Func<Certificate, bool>> filter);
 
         Task<List<Certificate>> GetListAsync();
-        Task<List<Certificate>> GetListByCategoryIdAsync(int id);
+        Task<Certificate> GetListByCategoryIdAsync(int id);
 
         Task<Certificate> GetByIdAsync(int id);
 

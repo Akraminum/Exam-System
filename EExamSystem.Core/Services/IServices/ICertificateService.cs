@@ -8,7 +8,7 @@ namespace EExamSystem.Core.Services.IServices
     {
         Task<CertificateOutput> GetAsync(int id);
 
-        Task<List<CertificateOutput>> GetListByCategoryIdAsync(int id);
+        Task<CertificateOutput> GetListByCategoryIdAsync(int id);
 
         Task<List<CertificateOutput>> GetListAsync();
 
@@ -21,5 +21,7 @@ namespace EExamSystem.Core.Services.IServices
         Task<List<CertificateOutput>> AddRangeAsync(List<CertificateInput> input);
 
         Task<List<CertificateOutput>> UpdateRangeAsync(List<CertificateUpdateInput> input);
+
+        bool CheckRange(decimal PassPercentage);
     }
 }

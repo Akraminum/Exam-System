@@ -35,7 +35,6 @@ namespace EExamSystem.Core.Services
             return _output;
         }
 
-
         public async Task DeleteAsync(CertificateDeleteInput input)
         {
             var _entity = _mapper.Map<Certificate>(input);
@@ -56,10 +55,10 @@ namespace EExamSystem.Core.Services
             return _output;
         }
 
-        public async Task<List<CertificateOutput>> GetListByCategoryIdAsync(int id)
+        public async Task<CertificateOutput> GetListByCategoryIdAsync(int id)
         {
             var _entities = await _certificateRepository.GetListByCategoryIdAsync(id);
-            var _output = _mapper.Map<List<CertificateOutput>>(_entities);
+            var _output = _mapper.Map<CertificateOutput>(_entities);
             return _output;
         }
 
@@ -80,5 +79,14 @@ namespace EExamSystem.Core.Services
 
         }
 
+
+        public bool CheckRange(decimal PassPercentage)
+        {
+            if (PassPercentage < 0 || PassPercentage > 100)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
