@@ -79,24 +79,24 @@ namespace EExamSystem.Infrastructure.DataBase
            });
 
 
-           modelBuilder
-          .Entity<StudentExam>()
-          .HasMany(c => c.Questions)
-          .WithMany(s => s.StudentExams)
-          .UsingEntity<StudentExamQuestion>(
+            modelBuilder
+           .Entity<StudentExam>()
+           .HasMany(c => c.Questions)
+           .WithMany(s => s.StudentExams)
+           .UsingEntity<StudentExamQuestion>(
+              j => j
+               .HasOne(pt => pt.Question)
+               .WithMany(t => t.UserExamQuestions)
+               .HasForeignKey(pt => pt.QuestionId),
              j => j
-              .HasOne(pt => pt.Question)
-              .WithMany(t => t.UserExamQuestions)
-              .HasForeignKey(pt => pt.QuestionId),
-            j => j
-                .HasOne(pt => pt.UserExam)
-                .WithMany(p => p.UserExamQuestions)
-                .HasForeignKey(pt => pt.UserExamId),
-            j =>
-            {
-                //j.HasKey(t => new { t.UserExam, t.QuestionId });
-                j.ToTable("UserExamQuestionHistory");
-            });
+                 .HasOne(pt => pt.UserExam)
+                 .WithMany(p => p.UserExamQuestions)
+                 .HasForeignKey(pt => pt.UserExamId),
+             j =>
+             {
+                 //j.HasKey(t => new { t.UserExam, t.QuestionId });
+                 j.ToTable("UserExamQuestionHistory");
+             });
 
             modelBuilder
            .Entity<StudentExamQuestion>()

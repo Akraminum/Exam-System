@@ -1,11 +1,7 @@
-﻿using EExamSystem.Infrastructure.DataBase;
-using Microsoft.Extensions.Configuration;
+﻿using EExamSystem.API.Mappers.Tests;
+using EExamSystem.Core.Services;
+using EExamSystem.Core.Services.IServices;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EExamSystem.Core
 {
@@ -14,7 +10,10 @@ namespace EExamSystem.Core
 
         public static void InjectServices(this IServiceCollection services)
         {
-
+            services.AddAutoMapper(typeof(TestsProfile));
+            services.AddScoped<ITopicService, TopicService>();
+            services.AddScoped<ICateoryService, CateoryService>();
+            services.AddScoped<ICertificateService, CertificateService>();
         }
 
 

@@ -2,6 +2,7 @@
 using EExamSystem.Infrastructure.Entities.Categorys;
 using EExamSystem.Infrastructure.Entities.Users;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace EExamSystem.Infrastructure.Entities.Certificates
 {
@@ -14,9 +15,13 @@ namespace EExamSystem.Infrastructure.Entities.Certificates
         /* public int ExamId { get; set; }*/
         public string Title { get; set; }
         public string? Description { get; set; }
-        public decimal? PassPercentage { get; set; }
-        public string? signature { get; set; }
 
+        //[MaxLength(100, ErrorMessage = "Sorry but Pass Percentage can't be more than 100")]
+        //[MinLength(0, ErrorMessage = "Sorry but Pass Percentage can't be less than 0")]
+        [Range(0, 100, ErrorMessage = "Sorry but Pass Percentage must be between 50 and 100.")]
+        public decimal? PassPercentage { get; set; }
+
+        public string? signature { get; set; }
 
         public Category? Category { get; set; }
 
